@@ -273,6 +273,10 @@ func (e *Exporter) Collect(ch chan<- prometheus.Metric) {
 		return
 	}
 
+	ch <- prometheus.MustNewConstMetric(
+		up, prometheus.GaugeValue, 1,
+	)
+
 	e.AssembleMetrics(channelIdStatusMap, channelIdStatisticsMap, ch)
 
 	versionString := e.GetMirthVersion()
